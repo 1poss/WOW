@@ -9,8 +9,11 @@ namespace WOW {
 
         Canvas overlayCanvas;
 
+        public readonly UIEvents events;
+
         public UIApp() {
             ctx = new UIContext();
+            events = new UIEvents();
         }
 
         public void Inject(Canvas overlayCanvas, Templates templates) {
@@ -26,7 +29,7 @@ namespace WOW {
                 ctx.w_login = window;
 
                 window.OnStartHandle = () => {
-                    Debug.Log("W_Login_Open: OnStartHandle");
+                    events.W_Login_Start();
                 };
             }
         }

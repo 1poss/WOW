@@ -22,6 +22,8 @@ namespace WOW {
             // ==== Init ====
             ctx.templates.Init();
 
+            ClientBindings.Binding(ctx);
+
             // ==== Enter Game ====
             ctx.uiApp.W_Login_Open();
 

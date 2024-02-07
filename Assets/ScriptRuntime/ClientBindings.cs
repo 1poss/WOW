@@ -8,6 +8,7 @@ namespace WOW {
             var uiEvents = ctx.uiApp.events;
             uiEvents.W_Login_StartHandle = () => {
                 GameBusiness.Enter(ctx.gameContext);
+                ctx.uiApp.W_Login_Close();
             };
         }
 

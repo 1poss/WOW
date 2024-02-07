@@ -12,6 +12,10 @@ namespace WOW {
 
         [SerializeField] SpriteRenderer sr;
 
+        public void Ctor() {
+            
+        }
+
     }
 
 }

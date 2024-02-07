@@ -49,8 +49,13 @@ namespace WOW {
             }
         }
 
-        public bool Entity_TryGet(string name, out GameObject entity) {
+        bool Entity_TryGet(string name, out GameObject entity) {
             return entities.TryGetValue(name, out entity);
+        }
+
+        public GameObject Entity_GetRole() {
+            Entity_TryGet("Entity_Role", out var entity);
+            return entity;
         }
 
         public bool UI_TryGet(string name, out GameObject ui) {

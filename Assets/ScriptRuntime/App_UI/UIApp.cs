@@ -34,6 +34,14 @@ namespace WOW {
             }
         }
 
+        public void W_Login_Close() {
+            var window = ctx.w_login;
+            if (window != null) {
+                Object.Destroy(window.gameObject);
+                ctx.w_login = null;
+            }
+        }
+
         T Open<T>() where T : MonoBehaviour {
             string name = typeof(T).Name;
             bool has = templates.UI_TryGet(name, out var prefab);

@@ -19,7 +19,7 @@ namespace WOW {
 
         public void Inject(Canvas overlayCanvas) {
             uiApp.Inject(overlayCanvas, templates);
-            gameContext.Inject(uiApp);
+            gameContext.Inject(uiApp, templates);
         }
 
     }

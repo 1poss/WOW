@@ -9,6 +9,18 @@ namespace WOW.Business {
             var role = RoleDomain.Spawn(ctx, 1);
         }
 
+        public static void PreTick(GameContext ctx, float dt) {
+
+        }
+
+        public static void FixTick(GameContext ctx, float fixdt) {
+
+        }
+
+        public static void LateTick(GameContext ctx, float latedt) {
+
+        }
+
     }
 
 }

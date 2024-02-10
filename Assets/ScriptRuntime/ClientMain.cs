@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using WOW.Business;
 
 namespace WOW {
 
@@ -29,7 +30,23 @@ namespace WOW {
 
         }
 
+        float restDT;
         void Update() {
+
+            float dt = Time.deltaTime;
+            GameBusiness.PreTick(ctx.gameContext, dt);
+
+            restDT += dt;
+            const float fixInterval = 0.02f;
+            if (restDT <= fixInterval) {
+                GameBusiness.FixTick(ctx.gameContext, restDT);
+                restDT = 0;
+            } else {
+                while (restDT > fixInterval) {
+                    GameBusiness.FixTick(ctx.gameContext, fixInterval);
+                    restDT -= fixInterval;
+                }
+            }
 
         }
 

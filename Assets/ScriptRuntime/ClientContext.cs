@@ -1,4 +1,4 @@
-using UnityEngine;
+using System.Numerics;
 using WOW.Business;
 
 namespace WOW {
@@ -17,7 +17,7 @@ namespace WOW {
             uiApp = new UIApp();
         }
 
-        public void Inject(Canvas overlayCanvas) {
+        public void Inject(UnityEngine.Canvas overlayCanvas) {
             uiApp.Inject(overlayCanvas, templates);
             gameContext.Inject(uiApp, templates);
         }

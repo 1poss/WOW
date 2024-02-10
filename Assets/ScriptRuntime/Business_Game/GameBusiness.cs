@@ -10,7 +10,7 @@ namespace WOW.Business {
         }
 
         public static void PreTick(GameContext ctx, float dt) {
-
+            ctx.inputEntity.Process();
         }
 
         public static void FixTick(GameContext ctx, float fixdt) {

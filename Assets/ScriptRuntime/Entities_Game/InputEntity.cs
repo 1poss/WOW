@@ -6,15 +6,21 @@ namespace WOW {
     public class InputEntity {
 
         public bool isLeftDown;
-        public bool isLeftUp;
 
         public bool isRightDown;
-        public bool isRightUp;
 
         public Vector2 downScreenPos;
-        public Vector2 upScreenPos;
+        public Vector2 downWorldPos;
 
         public InputEntity() { }
+
+        public void Process() {
+            if (Input.GetMouseButtonDown(0)) {
+                downScreenPos = Input.mousePosition;
+            }
+            isLeftDown = Input.GetMouseButtonDown(0);
+            isRightDown = Input.GetMouseButtonDown(1);
+        }
 
     }
 

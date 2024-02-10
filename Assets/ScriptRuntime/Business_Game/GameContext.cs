@@ -9,6 +9,7 @@ namespace WOW.Business {
         public IDService idService;
 
         public UIApp uiApp;
+        public CameraCore cameraCore;
         public Templates templates;
 
         public GameContext() {
@@ -18,8 +19,9 @@ namespace WOW.Business {
             idService = new IDService();
         }
 
-        public void Inject(UIApp uiApp, Templates templates) {
+        public void Inject(UIApp uiApp, CameraCore cameraCore, Templates templates) {
             this.uiApp = uiApp;
+            this.cameraCore = cameraCore;
             this.templates = templates;
         }
 

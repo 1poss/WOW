@@ -5,7 +5,7 @@ namespace WOW {
 
     public class CameraCore {
 
-        Camera mainCamera;
+        public Camera mainCamera;
 
         public CameraCore() { }
 

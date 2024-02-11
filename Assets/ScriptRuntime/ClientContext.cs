@@ -19,7 +19,8 @@ namespace WOW {
             uiApp = new UIApp();
         }
 
-        public void Inject(UnityEngine.Canvas overlayCanvas) {
+        public void Inject(UnityEngine.Canvas overlayCanvas, UnityEngine.Camera camera) {
+            cameraCore.Inject(camera);
             uiApp.Inject(overlayCanvas, templates);
             gameContext.Inject(uiApp, cameraCore, templates);
         }

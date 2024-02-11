@@ -18,7 +18,7 @@ namespace WOW {
             ctx = new ClientContext();
 
             // ==== Inject ====
-            ctx.Inject(overlayCanvas);
+            ctx.Inject(overlayCanvas, Camera.main);
 
             // ==== Init ====
             ctx.templates.Init();

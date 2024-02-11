@@ -12,8 +12,14 @@ namespace WOW {
 
         [SerializeField] SpriteRenderer sr;
 
+        public Vector2Int[] path;
+
         public void Ctor() {
-            
+            path = new Vector2Int[10000];
+        }
+
+        public Vector2Int Pos_PosInt() {
+            return new Vector2Int((int)transform.position.x, (int)transform.position.y);
         }
 
     }

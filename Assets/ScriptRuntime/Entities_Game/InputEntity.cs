@@ -15,7 +15,7 @@ namespace WOW {
         public InputEntity() { }
 
         public void Process() {
-            if (Input.GetMouseButtonDown(0)) {
+            if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)) {
                 downScreenPos = Input.mousePosition;
             }
             isLeftDown = Input.GetMouseButtonDown(0);

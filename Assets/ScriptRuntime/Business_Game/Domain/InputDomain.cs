@@ -41,12 +41,7 @@ namespace WOW.Business {
                 if (ctx.playerEntity.chosenEntityType == EntityType.Role) {
                     bool has = ctx.roleRepository.TryGet(id, out var role);
                     if (role != null) {
-                        int pathLen = GFPathfinding2D.AStar(role.Pos_PosInt(), input.downWorldPos.FloorToVector2Int(), 10000, (walkPos) => {
-                            return true;
-                        }, role.path, false);
-                        if (pathLen > 0) {
-                            role.transform.position = input.downWorldPos;
-                        }
+                        role.Move_Start(input.downWorldPos);
                     }
                 }
             }

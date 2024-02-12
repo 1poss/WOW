@@ -12,14 +12,37 @@ namespace WOW {
 
         [SerializeField] SpriteRenderer sr;
 
-        public Vector2Int[] path;
+        public bool isReachTarget;
+        public Vector2 targetPos;
+        public float moveSpeed;
 
         public void Ctor() {
-            path = new Vector2Int[10000];
+            moveSpeed = 5;
         }
 
         public Vector2Int Pos_PosInt() {
             return new Vector2Int((int)transform.position.x, (int)transform.position.y);
+        }
+
+        public void Move_Start(Vector2 targetPos) {
+            this.targetPos = targetPos;
+            this.isReachTarget = false;
+        }
+
+        public void Move_FixTick(float fixdt) {
+            if (isReachTarget) {
+                return;
+            }
+            Vector2 curPos = transform.position;
+            float moveSpeedDTSqr = moveSpeed * fixdt * moveSpeed;
+            if (Vector2.SqrMagnitude(targetPos - curPos) <= moveSpeedDTSqr) {
+                rb.MovePosition(targetPos);
+                isReachTarget = true;
+            } else {
+                Vector2 dir = targetPos - curPos;
+                Vector2 nextPos = curPos + dir.normalized * moveSpeed * fixdt;
+                rb.MovePosition(nextPos);
+            }
         }
 
     }

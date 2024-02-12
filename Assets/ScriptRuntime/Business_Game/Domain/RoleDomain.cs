@@ -7,5 +7,9 @@ namespace WOW.Business {
             ctx.roleRepository.Add(role);
             return role;
         }
+
+        public static void MoveByPath(GameContext ctx, RoleEntity role, float fixdt) {
+            role.Move_FixTick(fixdt);
+        }
     }
 }

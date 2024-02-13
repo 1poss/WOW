@@ -11,6 +11,7 @@ namespace WOW {
         [SerializeField] Rigidbody2D rb;
 
         [SerializeField] SpriteRenderer sr;
+        [SerializeField] LineRenderer lr;
 
         public bool isReachTarget;
         public Vector2 targetPos;
@@ -27,12 +28,18 @@ namespace WOW {
         public void Move_Start(Vector2 targetPos) {
             this.targetPos = targetPos;
             this.isReachTarget = false;
+            lr.positionCount = 2;
         }
 
         public void Move_FixTick(float fixdt) {
+
             if (isReachTarget) {
+                lr.enabled = false;
                 return;
             }
+
+            lr.enabled = true;
+
             Vector2 curPos = transform.position;
             float moveSpeedDTSqr = moveSpeed * fixdt * moveSpeed;
             if (Vector2.SqrMagnitude(targetPos - curPos) <= moveSpeedDTSqr) {
@@ -43,6 +50,10 @@ namespace WOW {
                 Vector2 nextPos = curPos + dir.normalized * moveSpeed * fixdt;
                 rb.MovePosition(nextPos);
             }
+
+            lr.SetPosition(0, transform.position);
+            lr.SetPosition(1, targetPos);
+            
         }
 
     }

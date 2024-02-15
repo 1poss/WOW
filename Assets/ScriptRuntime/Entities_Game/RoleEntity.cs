@@ -7,6 +7,7 @@ namespace WOW {
         public readonly EntityType entityType = EntityType.Role;
         public int id;
         public int typeID;
+        public AllyType allyType;
 
         [SerializeField] Rigidbody2D rb;
 
@@ -19,10 +20,15 @@ namespace WOW {
 
         public void Ctor() {
             moveSpeed = 5;
+            isReachTarget = true;
         }
 
         public Vector2Int Pos_PosInt() {
             return new Vector2Int((int)transform.position.x, (int)transform.position.y);
+        }
+
+        public void Pos_Set(Vector2 pos) {
+            transform.position = pos;
         }
 
         public void Move_Start(Vector2 targetPos) {

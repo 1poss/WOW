@@ -51,6 +51,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cd0f3d1d0429caf4081722764a68ffff, type: 2}
   - {fileID: 11400000, guid: 4642eb557e1364340850de034f637f64, type: 2}
   - {fileID: 11400000, guid: 3d856ebf82f42074fa8b0221e302707e, type: 2}
+  - {fileID: 11400000, guid: 7f5c950ad15d6f149bd555cb1d52b29a, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -97,6 +98,7 @@ MonoBehaviour:
     - TM_Role
     - TM_Skill
     - TM_Bullet
+    - TM_GameLevel
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: e8344629afb727744a8747b640918662, type: 2}

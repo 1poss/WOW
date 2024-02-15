@@ -9,6 +9,9 @@ namespace WOW {
 
     public class Templates {
 
+        Dictionary<Bit64, GameLevelTM> gameLevels;
+        AsyncOperationHandle gameLevelsOP;
+
         Dictionary<string, GameObject> entities;
         AsyncOperationHandle entitiesOP;
 
@@ -25,11 +28,25 @@ namespace WOW {
         AsyncOperationHandle bulletTMsOP;
 
         public Templates() {
+            gameLevels = new Dictionary<Bit64, GameLevelTM>();
             entities = new Dictionary<string, GameObject>();
             uis = new Dictionary<string, GameObject>();
+            roleTMs = new Dictionary<int, RoleTM>();
+            skillTMs = new Dictionary<int, SkillTM>();
+            bulletTMs = new Dictionary<int, BulletTM>();
         }
 
         public void Init() {
+            {
+                AssetLabelReference labelReference = new AssetLabelReference();
+                labelReference.labelString = "TM_GameLevel";
+                var op = Addressables.LoadAssetsAsync<GameLevelTM>(labelReference, null);
+                var list = op.WaitForCompletion();
+                foreach (var gameLevel in list) {
+                    gameLevels.Add(new Bit64(gameLevel.chapter, gameLevel.level), gameLevel);
+                }
+                gameLevelsOP = op;
+            }
             {
                 AssetLabelReference labelReference = new AssetLabelReference();
                 labelReference.labelString = "Entities";
@@ -55,7 +72,6 @@ namespace WOW {
                 labelReference.labelString = "TM_Role";
                 var op = Addressables.LoadAssetsAsync<RoleTM>(labelReference, null);
                 var list = op.WaitForCompletion();
-                roleTMs = new Dictionary<int, RoleTM>();
                 foreach (var roleTM in list) {
                     roleTMs.Add(roleTM.typeID, roleTM);
                 }
@@ -66,7 +82,6 @@ namespace WOW {
                 labelReference.labelString = "TM_Skill";
                 var op = Addressables.LoadAssetsAsync<SkillTM>(labelReference, null);
                 var list = op.WaitForCompletion();
-                skillTMs = new Dictionary<int, SkillTM>();
                 foreach (var skillTM in list) {
                     skillTMs.Add(skillTM.typeID, skillTM);
                 }
@@ -77,7 +92,6 @@ namespace WOW {
                 labelReference.labelString = "TM_Bullet";
                 var op = Addressables.LoadAssetsAsync<BulletTM>(labelReference, null);
                 var list = op.WaitForCompletion();
-                bulletTMs = new Dictionary<int, BulletTM>();
                 foreach (var bulletTM in list) {
                     bulletTMs.Add(bulletTM.typeID, bulletTM);
                 }
@@ -86,6 +100,9 @@ namespace WOW {
         }
 
         public void Release() {
+            if (gameLevelsOP.IsValid()) {
+                Addressables.Release(gameLevelsOP);
+            }
             if (entitiesOP.IsValid()) {
                 Addressables.Release(entitiesOP);
             }
@@ -114,6 +131,10 @@ namespace WOW {
 
         public bool UI_TryGet(string name, out GameObject ui) {
             return uis.TryGetValue(name, out ui);
+        }
+
+        public bool GameLevel_TryGet(int chapter, int level, out GameLevelTM gameLevel) {
+            return gameLevels.TryGetValue(new Bit64(chapter, level), out gameLevel);
         }
 
     }

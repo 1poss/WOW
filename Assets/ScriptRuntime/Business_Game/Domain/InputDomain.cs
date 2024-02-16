@@ -21,13 +21,21 @@ namespace WOW.Business {
         static void Selecting(GameContext ctx, InputEntity input) {
             if (input.isLeftDown) {
                 Collider2D coll = Physics2D.OverlapPoint(input.downWorldPos);
+                var player = ctx.playerEntity;
+                if (player.chosenEntityType == EntityType.Role) {
+                    bool has = ctx.roleRepository.TryGet(player.chosenEntityID, out var last);
+                    if (last != null) {
+                        last.SR_Chosen(false);
+                    }
+                }
                 if (coll != null) {
                     Debug.Log("ChooseEntity: " + coll.name);
                     // Role
                     RoleEntity role = coll.GetComponentInParent<RoleEntity>();
-                    if (role != null) {
+                    if (role != null && role.allyType == AllyType.Player) {
                         ctx.playerEntity.chosenEntityType = role.entityType;
                         ctx.playerEntity.chosenEntityID = role.id;
+                        role.SR_Chosen(true);
                         return;
                     }
                 }

@@ -12,6 +12,7 @@ namespace WOW {
         [SerializeField] Rigidbody2D rb;
 
         [SerializeField] SpriteRenderer sr;
+        [SerializeField] SpriteRenderer chosenSR;
         [SerializeField] LineRenderer lr;
 
         public bool isReachTarget;
@@ -21,6 +22,7 @@ namespace WOW {
         public void Ctor() {
             moveSpeed = 5;
             isReachTarget = true;
+            chosenSR.enabled = false;
         }
 
         public Vector2Int Pos_PosInt() {
@@ -60,6 +62,10 @@ namespace WOW {
             lr.SetPosition(0, transform.position);
             lr.SetPosition(1, targetPos);
             
+        }
+
+        public void SR_Chosen(bool chosen) {
+            chosenSR.enabled = chosen;
         }
 
     }

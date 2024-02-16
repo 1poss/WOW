@@ -25,6 +25,14 @@ namespace WOW.Business {
             this.templates = templates;
         }
 
+        public bool TryGetChosenRole(out RoleEntity role) {
+            if (playerEntity.chosenEntityType == EntityType.None) {
+                role = null;
+                return false;
+            }
+            return roleRepository.TryGet(playerEntity.chosenEntityID, out role);
+        }
+
     }
 
 }

@@ -6,6 +6,8 @@ namespace WOW.Business {
 
         public static void Init(GameContext ctx) {
 
+            Physics2D.IgnoreLayerCollision(LayerCollection.ROLE, LayerCollection.ROLE, true);
+
             var input = ctx.inputEntity;
 
             input.Bind(InputEnum.ChooseTeamer1, new KeyCode[] { KeyCode.Alpha1 });

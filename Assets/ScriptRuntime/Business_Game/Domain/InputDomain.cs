@@ -7,16 +7,18 @@ namespace WOW.Business {
     public static class InputDomain {
 
         public static void Process(GameContext ctx, InputEntity input) {
+
             input.Process();
 
             var cam = ctx.cameraCore.mainCamera;
-
             Vector3 worldPos = cam.ScreenToWorldPoint(ctx.inputEntity.downScreenPos);
             ctx.inputEntity.downWorldPos = worldPos;
 
             KeySelecting(ctx, input);
             MouseSelecting(ctx, input);
             MouseMoving(ctx, input);
+            Casting(ctx, input);
+
         }
 
         static void KeySelecting(GameContext ctx, InputEntity input) {
@@ -29,7 +31,6 @@ namespace WOW.Business {
                 ctx.playerEntity.chosenEntityType = EntityType.Role;
                 ctx.playerEntity.chosenEntityID = chosenRole.id;
                 chosenRole.SR_Chosen(true);
-                Debug.Log($"Chosen: {chosenRole.id}");
             }
         }
 
@@ -53,24 +54,27 @@ namespace WOW.Business {
 
         static void MouseMoving(GameContext ctx, InputEntity input) {
             if (input.isRightDown) {
-                int id = ctx.playerEntity.chosenEntityID;
-                if (ctx.playerEntity.chosenEntityType == EntityType.Role) {
-                    bool has = ctx.roleRepository.TryGet(id, out var role);
-                    if (role != null) {
-                        role.Move_Start(input.downWorldPos);
-                    }
+                if (ctx.TryGetChosenRole(out var role)) {
+                    role.Move_Start(input.downWorldPos);
                 }
             }
         }
 
-        static void CancelChosen(GameContext ctx) {
-            var player = ctx.playerEntity;
-            if (player.chosenEntityType == EntityType.Role) {
-                bool has = ctx.roleRepository.TryGet(player.chosenEntityID, out var last);
-                if (last != null) {
-                    last.SR_Chosen(false);
-                }
+        static void Casting(GameContext ctx, InputEntity input) {
+            if (!input.isSkillDown) {
+                return;
             }
+            if (ctx.TryGetChosenRole(out var role)) {
+                // Skill
+                Debug.Log("Casting" + input.chosenSkill.ToString());
+            }
+        }
+
+        static void CancelChosen(GameContext ctx) {
+            if (ctx.TryGetChosenRole(out var role)) {
+                role.SR_Chosen(false);
+            }
+            var player = ctx.playerEntity;
             player.chosenEntityType = EntityType.None;
         }
 

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 308516658775485499}
   - component: {fileID: 6121474422446648184}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ GameObject:
   - component: {fileID: 4907734153475609910}
   - component: {fileID: 7398552601895465261}
   - component: {fileID: 8265574773208423923}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Entity_Role
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 100
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -131,7 +131,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &8265574773208423923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,7 +164,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7081894202570690682}
   - component: {fileID: 268070366845599773}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -302,7 +302,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2828041332508248032}
   - component: {fileID: 5031183658314207448}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ChosenSR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -388,7 +388,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5062584553560129171}
   - component: {fileID: 6804869873567912821}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BodySR
   m_TagString: Untagged
   m_Icon: {fileID: 0}

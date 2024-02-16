@@ -8,20 +8,34 @@ namespace WOW.Business {
 
         Dictionary<int, RoleEntity> all;
 
+        RoleEntity[] playerTeamers;
+        int playerTeamersCount;
+
         RoleEntity[] tempArray;
 
         public RoleRepository() {
             all = new Dictionary<int, RoleEntity>();
-
+            playerTeamers = new RoleEntity[10];
+            playerTeamersCount = 0;
             tempArray = new RoleEntity[1000];
         }
 
         public void Add(RoleEntity entity) {
             all.Add(entity.id, entity);
+            if (entity.allyType == AllyType.Player) {
+                playerTeamers[playerTeamersCount++] = entity;
+            }
         }
 
         public void Remove(RoleEntity entity) {
             all.Remove(entity.id);
+        }
+
+        public RoleEntity GetPlayerTeamer(int index) {
+            if (index < 0 || index >= playerTeamersCount) {
+                return null;
+            }
+            return playerTeamers[index];
         }
 
         public bool TryGet(int id, out RoleEntity entity) {

@@ -22,6 +22,7 @@ namespace WOW {
 
             // ==== Init ====
             ctx.templates.Init();
+            GameBusiness.Init(ctx.gameContext);
 
             ClientBindings.Binding(ctx);
 

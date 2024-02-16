@@ -26,6 +26,7 @@ namespace WOW {
         public InputEntity() {
             keybindings = new Dictionary<InputEnum, KeyCode[]>();
             skillKeys = new InputEnum[] {
+                InputEnum.Melee,
                 InputEnum.Skill1,
                 InputEnum.Skill2,
                 InputEnum.Skill3,

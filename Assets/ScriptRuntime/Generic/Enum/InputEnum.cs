@@ -4,11 +4,12 @@ namespace WOW {
 
         None,
 
-        Skill1 = 100,
-        Skill2 = 101,
-        Skill3 = 102,
-        Skill4 = 103,
-        Skill5 = 104,
+        Melee = 100,
+        Skill1 = 110,
+        Skill2 = 111,
+        Skill3 = 112,
+        Skill4 = 113,
+        Skill5 = 114,
 
         ChooseTeamer1 = 200,
         ChooseTeamer2 = 201,

@@ -15,6 +15,7 @@ namespace WOW.Business {
             input.Bind(InputEnum.ChooseTeamer3, new KeyCode[] { KeyCode.Alpha3 });
             input.Bind(InputEnum.ChooseTeamer4, new KeyCode[] { KeyCode.Alpha4 });
 
+            input.Bind(InputEnum.Melee, new KeyCode[] { KeyCode.A });
             input.Bind(InputEnum.Skill1, new KeyCode[] { KeyCode.Q });
             input.Bind(InputEnum.Skill2, new KeyCode[] { KeyCode.W });
             input.Bind(InputEnum.Skill3, new KeyCode[] { KeyCode.E });

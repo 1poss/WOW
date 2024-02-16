@@ -19,10 +19,14 @@ namespace WOW {
         public Vector2 targetPos;
         public float moveSpeed;
 
+        public RoleSkillSlotComponent skillSlotComponent;
+
         public void Ctor() {
             moveSpeed = 5;
             isReachTarget = true;
             chosenSR.enabled = false;
+
+            skillSlotComponent = new RoleSkillSlotComponent();
         }
 
         public Vector2Int Pos_PosInt() {
@@ -61,7 +65,7 @@ namespace WOW {
 
             lr.SetPosition(0, transform.position);
             lr.SetPosition(1, targetPos);
-            
+
         }
 
         public void SR_Chosen(bool chosen) {

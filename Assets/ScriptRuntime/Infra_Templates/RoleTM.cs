@@ -13,6 +13,8 @@ namespace WOW {
 
         public float moveSpeed;
 
+        public SkillTM[] skillPresets;
+
     }
 
 }

@@ -29,7 +29,6 @@ namespace WOW.Business {
                     }
                 }
                 if (coll != null) {
-                    Debug.Log("ChooseEntity: " + coll.name);
                     // Role
                     RoleEntity role = coll.GetComponentInParent<RoleEntity>();
                     if (role != null && role.allyType == AllyType.Player) {

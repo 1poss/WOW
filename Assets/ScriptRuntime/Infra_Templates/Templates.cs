@@ -74,6 +74,7 @@ namespace WOW {
                 var list = op.WaitForCompletion();
                 foreach (var roleTM in list) {
                     roleTMs.Add(roleTM.typeID, roleTM);
+                    roleTM.skillPresets = roleTM.skillPresets ?? new SkillTM[0];
                 }
                 roleTMsOP = op;
             }
@@ -135,6 +136,10 @@ namespace WOW {
 
         public bool GameLevel_TryGet(int chapter, int level, out GameLevelTM gameLevel) {
             return gameLevels.TryGetValue(new Bit64(chapter, level), out gameLevel);
+        }
+
+        public bool Role_TryGet(int typeID, out RoleTM roleTM) {
+            return roleTMs.TryGetValue(typeID, out roleTM);
         }
 
     }

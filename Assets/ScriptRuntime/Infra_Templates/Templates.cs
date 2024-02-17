@@ -142,6 +142,10 @@ namespace WOW {
             return roleTMs.TryGetValue(typeID, out roleTM);
         }
 
+        public bool Skill_TryGet(int typeID, out SkillTM skillTM) {
+            return skillTMs.TryGetValue(typeID, out skillTM);
+        }
+
     }
 
 }

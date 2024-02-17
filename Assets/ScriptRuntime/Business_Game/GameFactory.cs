@@ -33,10 +33,38 @@ namespace WOW.Business {
         }
 
         static SkillSubentity Skill_Create(Templates templates, IDService idService, int typeID, Vector2 pos) {
-            var entity = new SkillSubentity();
-            entity.id = idService.skillID++;
-            entity.typeID = typeID;
-            return entity;
+            bool has = templates.Skill_TryGet(typeID, out var tm);
+            if (!has) {
+                Debug.LogError($"GameFactory.Skill_Create: SkillTM not found: {typeID}");
+                return null;
+            }
+            var skill = new SkillSubentity();
+            skill.id = idService.skillID++;
+            skill.typeID = typeID;
+            skill.typeName = tm.typeName;
+
+            skill.castDirection = tm.castDirection;
+            skill.indicateType = tm.indicateType;
+
+            skill.cdSec = tm.cdSec;
+            skill.cdTimer = 0;
+
+            skill.stage = SkillStage.Pre;
+
+            skill.preSec = tm.preSec;
+            skill.preTimer = tm.preSec;
+            skill.actSec = tm.actSec;
+            skill.actTimer = tm.actSec;
+            skill.actInterval = tm.actInterval;
+            skill.actIntervalTimer = tm.actInterval;
+            skill.postSec = tm.postSec;
+            skill.postTimer = tm.postSec;
+
+            skill.hasSpawnBullet = tm.hasSpawnBullet;
+            skill.spawnPositionType = tm.spawnPositionType;
+
+            return skill;
+
         }
 
     }

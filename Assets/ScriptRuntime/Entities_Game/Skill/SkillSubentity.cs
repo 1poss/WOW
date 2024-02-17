@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace WOW {
 
     public class SkillSubentity {
@@ -26,6 +28,11 @@ namespace WOW {
         public float postTimer;
 
         public bool hasSpawnBullet;
+        public SkillSpawnPositionType spawnPositionType;
+
+        public bool hasActCollider;
+        public ShapeType actColliderShape;
+        public Vector2 actColliderSize;
 
     }
 

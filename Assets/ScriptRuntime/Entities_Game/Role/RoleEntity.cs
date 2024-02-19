@@ -9,11 +9,14 @@ namespace WOW {
         public int typeID;
         public AllyType allyType;
 
+        [SerializeField] public Transform body;
         [SerializeField] Rigidbody2D rb;
 
         [SerializeField] SpriteRenderer sr;
         [SerializeField] SpriteRenderer chosenSR;
         [SerializeField] LineRenderer lr;
+
+        public RoleMod mod;
 
         public bool isReachTarget;
         public Vector2 targetPos;
@@ -47,6 +50,7 @@ namespace WOW {
 
             if (isReachTarget) {
                 lr.enabled = false;
+                mod.Param_SetMagnitude(0);
                 return;
             }
 
@@ -54,17 +58,25 @@ namespace WOW {
 
             Vector2 curPos = transform.position;
             float moveSpeedDTSqr = moveSpeed * fixdt * moveSpeed;
-            if (Vector2.SqrMagnitude(targetPos - curPos) <= moveSpeedDTSqr) {
+            Vector2 dir = targetPos - curPos;
+            if (dir.sqrMagnitude <= moveSpeedDTSqr) {
                 rb.MovePosition(targetPos);
                 isReachTarget = true;
             } else {
-                Vector2 dir = targetPos - curPos;
                 Vector2 nextPos = curPos + dir.normalized * moveSpeed * fixdt;
                 rb.MovePosition(nextPos);
             }
 
             lr.SetPosition(0, transform.position);
             lr.SetPosition(1, targetPos);
+
+            mod.Param_SetMagnitude(1);
+
+            if (dir.x > 0) {
+                body.localScale = new Vector3(-1, 1, 1);
+            } else if (dir.x < 0) {
+                body.localScale = new Vector3(1, 1, 1);
+            }
 
         }
 

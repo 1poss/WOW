@@ -28,6 +28,10 @@ namespace WOW.Business {
                 role.skillSlotComponent.Add(skill);
             }
 
+            var mod = roleTM.mod;
+            mod = GameObject.Instantiate(mod, role.body);
+            role.mod = mod.GetComponent<RoleMod>();
+
             return role;
 
         }

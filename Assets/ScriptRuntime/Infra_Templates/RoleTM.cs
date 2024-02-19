@@ -15,6 +15,8 @@ namespace WOW {
 
         public SkillTM[] skillPresets;
 
+        public GameObject mod;
+
     }
 
 }

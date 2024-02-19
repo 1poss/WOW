@@ -17,5 +17,6 @@ MonoBehaviour:
   hp: 100
   hpMax: 100
   moveSpeed: 5
-  skillPresets: []
+  skillPresets:
+  - {fileID: 11400000, guid: fb0941d47abf2f048a5ccc79e8015230, type: 2}
   mod: {fileID: 3936725879515656231, guid: 85faefe97b2d583439e548dee2ab170e, type: 3}

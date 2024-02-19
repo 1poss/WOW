@@ -13,5 +13,10 @@ namespace WOW.Business {
         public static void MoveByPath(GameContext ctx, RoleEntity role, float fixdt) {
             role.Move_FixTick(fixdt);
         }
+
+        public static void Owner_Cast(GameContext ctx, RoleEntity owner) {
+            owner.Cast_ByKey(ctx.inputEntity.chosenSkill);
+        }
+
     }
 }

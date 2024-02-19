@@ -33,6 +33,17 @@ namespace WOW {
             return skillSlots.TryGetValue(input, out skill);
         }
 
+        public bool TryGetByTypeID(int typeID, out SkillSubentity skill) {
+            foreach (var kv in skillSlots) {
+                if (kv.Value.typeID == typeID) {
+                    skill = kv.Value;
+                    return true;
+                }
+            }
+            skill = null;
+            return false;
+        }
+
     }
 
 }

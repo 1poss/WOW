@@ -10,6 +10,10 @@ namespace WOW {
             animator.SetFloat("Magnitude", magnitude);
         }
 
+        public void Param_TriggerCast() {
+            animator.SetTrigger("Cast");
+        }
+
     }
 
 }

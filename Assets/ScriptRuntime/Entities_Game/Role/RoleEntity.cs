@@ -57,7 +57,7 @@ namespace WOW {
             lr.enabled = true;
 
             Vector2 curPos = transform.position;
-            float moveSpeedDTSqr = moveSpeed * fixdt * moveSpeed;
+            float moveSpeedDTSqr = moveSpeed * fixdt * moveSpeed * fixdt;
             Vector2 dir = targetPos - curPos;
             if (dir.sqrMagnitude <= moveSpeedDTSqr) {
                 rb.MovePosition(targetPos);
@@ -82,6 +82,26 @@ namespace WOW {
 
         public void SR_Chosen(bool chosen) {
             chosenSR.enabled = chosen;
+        }
+
+        public void Cast_ByKey(InputEnum key) {
+            bool has = skillSlotComponent.TryGet(key, out var skill);
+            if (!has) {
+                return;
+            }
+            Cast(skill);
+        }
+
+        public void Cast_ByTypeID(int typeID) {
+            bool has = skillSlotComponent.TryGetByTypeID(typeID, out var skill);
+            if (!has) {
+                return;
+            }
+            Cast(skill);
+        }
+
+        void Cast(SkillSubentity skill) {
+            mod.Param_TriggerCast();
         }
 
     }

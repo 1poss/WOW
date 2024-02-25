@@ -49,6 +49,8 @@ namespace WOW {
                 }
             }
 
+            GameBusiness.LateTick(ctx.gameContext, dt);
+
         }
 
         void OnApplicationQuit() {

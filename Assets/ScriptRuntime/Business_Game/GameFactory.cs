@@ -18,8 +18,13 @@ namespace WOW.Business {
             role.Ctor();
             role.id = idService.roleID++;
             role.typeID = typeID;
+            role.typeName = roleTM.typeName;
             role.allyType = allyType;
             role.Pos_Set(pos);
+
+            var attrCom = role.attrComponent;
+            attrCom.hp = roleTM.hp;
+            attrCom.hpMax = roleTM.hp;
 
             var skillPresets = roleTM.skillPresets;
             for (int i = 0; i < skillPresets.Length; i++) {

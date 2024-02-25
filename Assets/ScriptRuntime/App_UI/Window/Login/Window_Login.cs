@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace WOW {
+namespace WOW.UI {
 
     public class Window_Login : MonoBehaviour {
 

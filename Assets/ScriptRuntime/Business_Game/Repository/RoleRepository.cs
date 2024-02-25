@@ -38,6 +38,11 @@ namespace WOW.Business {
             return playerTeamers[index];
         }
 
+        public int GetPlayerTeamer(out RoleEntity[] result) {
+            result = playerTeamers;
+            return playerTeamersCount;
+        }
+
         public bool TryGet(int id, out RoleEntity entity) {
             return all.TryGetValue(id, out entity);
         }

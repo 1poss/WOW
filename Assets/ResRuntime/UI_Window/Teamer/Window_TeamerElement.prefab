@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 46, y: -24}
-  m_SizeDelta: {x: 100, y: 12}
+  m_SizeDelta: {x: 114, y: 12}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &3633498094706850367
 GameObject:
@@ -274,7 +274,7 @@ GameObject:
   - component: {fileID: 2103386193188095552}
   - component: {fileID: 2745195187692640501}
   m_Layer: 0
-  m_Name: Text (Legacy)
+  m_Name: Txt_Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -297,7 +297,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 46, y: 0}
-  m_SizeDelta: {x: 200, y: 24}
+  m_SizeDelta: {x: 114, y: 24}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &2103386193188095552
 CanvasRenderer:
@@ -351,8 +351,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7504027900605516348}
   - component: {fileID: 7001311192126429542}
+  - component: {fileID: -1544874549306316933}
   m_Layer: 0
-  m_Name: Panel_TeamerElement
+  m_Name: Window_TeamerElement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -378,7 +379,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 160, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &7001311192126429542
 CanvasRenderer:
@@ -388,3 +389,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6837836824974471975}
   m_CullTransparentMesh: 1
+--- !u!114 &-1544874549306316933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6837836824974471975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eb675ef4cbc17543bc3a2fc161f8ed9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityID: 0
+  icon: {fileID: 5016472724366646669}
+  nameTxt: {fileID: 2745195187692640501}
+  hpBar: {fileID: 4575881331151683235}

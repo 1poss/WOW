@@ -52,7 +52,7 @@ namespace WOW.Business {
         }
 
         public static void LateTick(GameContext ctx, float latedt) {
-
+            UIDomain.Teamer_Update(ctx);
         }
 
     }

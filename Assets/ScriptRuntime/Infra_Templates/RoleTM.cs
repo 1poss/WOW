@@ -9,7 +9,6 @@ namespace WOW {
         public string typeName;
 
         public float hp;
-        public float hpMax;
 
         public float moveSpeed;
 

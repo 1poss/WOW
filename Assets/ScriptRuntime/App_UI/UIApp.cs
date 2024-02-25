@@ -1,4 +1,5 @@
 using UnityEngine;
+using WOW.UI;
 
 namespace WOW {
 
@@ -21,6 +22,8 @@ namespace WOW {
             this.templates = templates;
         }
 
+        // ==== W Window ====
+        // - Login
         public void W_Login_Open() {
             var window = ctx.w_login;
             if (window == null) {
@@ -42,6 +45,39 @@ namespace WOW {
             }
         }
 
+        // - Teamer
+        public void W_Teamer_Open() {
+            var window = ctx.w_teamer;
+            if (window == null) {
+                window = Open<Window_Teamer>();
+                window.Ctor();
+                ctx.w_teamer = window;
+            }
+        }
+
+        public void W_Teamer_Add(int entityID, string name, Sprite sprite) {
+            var window = ctx.w_teamer;
+            if (window != null) {
+                window.Add(entityID, name, sprite);
+            }
+        }
+
+        public void W_Teamer_UpdateHP(int entityID, float hp, float hpMax) {
+            var window = ctx.w_teamer;
+            if (window != null) {
+                window.UpdateHP(entityID, hp, hpMax);
+            }
+        }
+
+        public void W_Teamer_Close() {
+            var window = ctx.w_teamer;
+            if (window != null) {
+                Object.Destroy(window.gameObject);
+                ctx.w_teamer = null;
+            }
+        }
+
+        // ==== Generic ====
         T Open<T>() where T : MonoBehaviour {
             string name = typeof(T).Name;
             bool has = templates.UI_TryGet(name, out var prefab);

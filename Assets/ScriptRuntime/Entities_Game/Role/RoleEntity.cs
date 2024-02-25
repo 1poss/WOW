@@ -7,6 +7,7 @@ namespace WOW {
         public readonly EntityType entityType = EntityType.Role;
         public int id;
         public int typeID;
+        public string typeName;
         public AllyType allyType;
 
         [SerializeField] public Transform body;
@@ -18,11 +19,14 @@ namespace WOW {
 
         public RoleMod mod;
 
+        public Sprite portraitIcon;
+
         public bool isReachTarget;
         public Vector2 targetPos;
         public float moveSpeed;
 
         public RoleSkillSlotComponent skillSlotComponent;
+        public RoleAttrComponent attrComponent;
 
         public void Ctor() {
             moveSpeed = 5;
@@ -30,6 +34,7 @@ namespace WOW {
             chosenSR.enabled = false;
 
             skillSlotComponent = new RoleSkillSlotComponent();
+            attrComponent = new RoleAttrComponent();
         }
 
         public Vector2Int Pos_PosInt() {

@@ -19,6 +19,8 @@ namespace WOW {
         public bool isChooseDown;
         public InputEnum chosenChoose;
 
+        public bool isCancelDown;
+
         Dictionary<InputEnum, KeyCode[]> keybindings;
         readonly InputEnum[] skillKeys;
         readonly InputEnum[] chooseKeys;
@@ -43,49 +45,70 @@ namespace WOW {
 
         public void Process() {
 
-            if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)) {
-                downScreenPos = Input.mousePosition;
+            // Mouse Down
+            {
+                if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)) {
+                    downScreenPos = Input.mousePosition;
+                }
+
+                isLeftDown = Input.GetMouseButtonDown(0);
+                isRightDown = Input.GetMouseButtonDown(1);
             }
 
-            isLeftDown = Input.GetMouseButtonDown(0);
-            isRightDown = Input.GetMouseButtonDown(1);
-
-            // Skill Down
-            isSkillDown = false;
-            foreach (InputEnum kv in skillKeys) {
-                bool has = keybindings.TryGetValue(kv, out var keys);
-                if (!has) {
-                    continue;
-                }
-                foreach (var key in keys) {
-                    if (Input.GetKeyDown(key)) {
-                        chosenSkill = kv;
-                        isSkillDown = true;
-                        break;
+            // Cancel Down
+            {
+                isCancelDown = false;
+                bool has = keybindings.TryGetValue(InputEnum.CancelChose, out var cancelKeys);
+                if (has) {
+                    foreach (var key in cancelKeys) {
+                        if (Input.GetKeyDown(key)) {
+                            isCancelDown = true;
+                            break;
+                        }
                     }
                 }
             }
-            if (!isSkillDown) {
-                chosenSkill = InputEnum.None;
+
+            // Skill Down
+            {
+                isSkillDown = false;
+                foreach (InputEnum kv in skillKeys) {
+                    bool has = keybindings.TryGetValue(kv, out var keys);
+                    if (!has) {
+                        continue;
+                    }
+                    foreach (var key in keys) {
+                        if (Input.GetKeyDown(key)) {
+                            chosenSkill = kv;
+                            isSkillDown = true;
+                            break;
+                        }
+                    }
+                }
+                if (!isSkillDown) {
+                    chosenSkill = InputEnum.None;
+                }
             }
 
             // Choose Down
-            isChooseDown = false;
-            foreach (InputEnum kv in chooseKeys) {
-                bool has = keybindings.TryGetValue(kv, out var keys);
-                if (!has) {
-                    continue;
-                }
-                foreach (var key in keys) {
-                    if (Input.GetKeyDown(key)) {
-                        chosenChoose = kv;
-                        isChooseDown = true;
-                        break;
+            {
+                isChooseDown = false;
+                foreach (InputEnum kv in chooseKeys) {
+                    bool has = keybindings.TryGetValue(kv, out var keys);
+                    if (!has) {
+                        continue;
+                    }
+                    foreach (var key in keys) {
+                        if (Input.GetKeyDown(key)) {
+                            chosenChoose = kv;
+                            isChooseDown = true;
+                            break;
+                        }
                     }
                 }
-            }
-            if (!isChooseDown) {
-                chosenChoose = InputEnum.None;
+                if (!isChooseDown) {
+                    chosenChoose = InputEnum.None;
+                }
             }
 
         }

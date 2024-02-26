@@ -14,11 +14,19 @@ namespace WOW.Business {
             Vector3 worldPos = cam.ScreenToWorldPoint(ctx.inputEntity.downScreenPos);
             ctx.inputEntity.downWorldPos = worldPos;
 
+            TryCancelChoose(ctx, input);
             KeySelecting(ctx, input);
             MouseSelecting(ctx, input);
             MouseMoving(ctx, input);
             Casting(ctx, input);
 
+        }
+
+        static void TryCancelChoose(GameContext ctx, InputEntity input) {
+            if (!input.isCancelDown) {
+                return;
+            }
+            CancelChosen(ctx);
         }
 
         static void KeySelecting(GameContext ctx, InputEntity input) {

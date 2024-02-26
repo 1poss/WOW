@@ -23,18 +23,22 @@ namespace WOW {
 
         public bool isReachTarget;
         public Vector2 targetPos;
-        public float moveSpeed;
 
+        public RoleFSMComponent fsm;
         public RoleSkillSlotComponent skillSlotComponent;
         public RoleAttrComponent attrComponent;
+        public RoleCommandComponent commandComponent;
 
         public void Ctor() {
-            moveSpeed = 5;
+
             isReachTarget = true;
             chosenSR.enabled = false;
 
+            fsm = new RoleFSMComponent();
             skillSlotComponent = new RoleSkillSlotComponent();
             attrComponent = new RoleAttrComponent();
+            commandComponent = new RoleCommandComponent();
+
         }
 
         public Vector2Int Pos_PosInt() {
@@ -51,7 +55,7 @@ namespace WOW {
             lr.positionCount = 2;
         }
 
-        public void Move_FixTick(float fixdt) {
+        public void Move_ByClickTick(float fixdt) {
 
             if (isReachTarget) {
                 lr.enabled = false;
@@ -62,6 +66,7 @@ namespace WOW {
             lr.enabled = true;
 
             Vector2 curPos = transform.position;
+            float moveSpeed = attrComponent.moveSpeed;
             float moveSpeedDTSqr = moveSpeed * fixdt * moveSpeed * fixdt;
             Vector2 dir = targetPos - curPos;
             if (dir.sqrMagnitude <= moveSpeedDTSqr) {
@@ -85,28 +90,14 @@ namespace WOW {
 
         }
 
+        public void Move_Stop() {
+            isReachTarget = true;
+            lr.enabled = false;
+            mod.Param_SetMagnitude(0);
+        }
+
         public void SR_Chosen(bool chosen) {
             chosenSR.enabled = chosen;
-        }
-
-        public void Cast_ByKey(InputEnum key) {
-            bool has = skillSlotComponent.TryGet(key, out var skill);
-            if (!has) {
-                return;
-            }
-            Cast(skill);
-        }
-
-        public void Cast_ByTypeID(int typeID) {
-            bool has = skillSlotComponent.TryGetByTypeID(typeID, out var skill);
-            if (!has) {
-                return;
-            }
-            Cast(skill);
-        }
-
-        void Cast(SkillSubentity skill) {
-            mod.Param_TriggerCast();
         }
 
     }

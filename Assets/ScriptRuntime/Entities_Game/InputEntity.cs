@@ -14,7 +14,7 @@ namespace WOW {
         public Vector2 downWorldPos;
 
         public bool isSkillDown;
-        public InputEnum chosenSkill;
+        public InputEnum chosenSkillKey;
 
         public bool isChooseDown;
         public InputEnum chosenChoose;
@@ -79,14 +79,14 @@ namespace WOW {
                     }
                     foreach (var key in keys) {
                         if (Input.GetKeyDown(key)) {
-                            chosenSkill = kv;
+                            chosenSkillKey = kv;
                             isSkillDown = true;
                             break;
                         }
                     }
                 }
                 if (!isSkillDown) {
-                    chosenSkill = InputEnum.None;
+                    chosenSkillKey = InputEnum.None;
                 }
             }
 

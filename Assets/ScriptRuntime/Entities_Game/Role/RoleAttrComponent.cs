@@ -5,6 +5,8 @@ namespace WOW {
         public float hp;
         public float hpMax;
 
+        public float moveSpeed;
+
     }
 
 }

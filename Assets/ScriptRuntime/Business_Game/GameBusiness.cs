@@ -36,15 +36,10 @@ namespace WOW.Business {
 
         public static void FixTick(GameContext ctx, float fixdt) {
 
-            bool isChosen = ctx.TryGetChosenRole(out var chosenRole);
-            if (isChosen) {
-                RoleDomain.Owner_Cast(ctx, chosenRole);
-            }
-
             int roleLen = ctx.roleRepository.TakeAll(out var roles);
             for (int i = 0; i < roleLen; i++) {
                 var role = roles[i];
-                RoleDomain.MoveByPath(ctx, role, fixdt);
+                RoleFSMController.FixedTick(ctx, role, fixdt);
             }
 
             Physics2D.Simulate(fixdt);

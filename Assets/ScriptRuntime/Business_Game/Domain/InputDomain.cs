@@ -18,7 +18,7 @@ namespace WOW.Business {
             KeySelecting(ctx, input);
             MouseSelecting(ctx, input);
             MouseMoving(ctx, input);
-            Casting(ctx, input);
+            ChosenCast(ctx);
 
         }
 
@@ -68,22 +68,20 @@ namespace WOW.Business {
             }
         }
 
-        static void Casting(GameContext ctx, InputEntity input) {
-            if (!input.isSkillDown) {
-                return;
-            }
-            if (ctx.TryGetChosenRole(out var role)) {
-                // Skill
-                Debug.Log("Casting" + input.chosenSkill.ToString());
-            }
-        }
-
         static void CancelChosen(GameContext ctx) {
             if (ctx.TryGetChosenRole(out var role)) {
                 role.SR_Chosen(false);
             }
             var player = ctx.playerEntity;
             player.chosenEntityType = EntityType.None;
+        }
+
+        static void ChosenCast(GameContext ctx) {
+            bool isChosen = ctx.TryGetChosenRole(out var chosenRole);
+            if (isChosen) {
+                var input = ctx.inputEntity;
+                chosenRole.commandComponent.RecordCast(input.isSkillDown, input.chosenSkillKey);
+            }
         }
 
     }

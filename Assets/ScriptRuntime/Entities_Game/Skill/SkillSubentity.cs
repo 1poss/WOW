@@ -14,18 +14,12 @@ namespace WOW {
         public float cdSec;
         public float cdTimer;
 
-        public SkillStage stage;
-
         public float preSec;
-        public float preTimer;
 
         public float actSec;
-        public float actTimer;
         public float actInterval;
-        public float actIntervalTimer;
 
         public float postSec;
-        public float postTimer;
 
         public bool hasSpawnBullet;
         public SkillSpawnPositionType spawnPositionType;

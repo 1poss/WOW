@@ -25,6 +25,7 @@ namespace WOW.Business {
             var attrCom = role.attrComponent;
             attrCom.hp = roleTM.hp;
             attrCom.hpMax = roleTM.hp;
+            attrCom.moveSpeed = roleTM.moveSpeed;
 
             var skillPresets = roleTM.skillPresets;
             for (int i = 0; i < skillPresets.Length; i++) {
@@ -58,16 +59,10 @@ namespace WOW.Business {
             skill.cdSec = tm.cdSec;
             skill.cdTimer = 0;
 
-            skill.stage = SkillStage.Pre;
-
             skill.preSec = tm.preSec;
-            skill.preTimer = tm.preSec;
             skill.actSec = tm.actSec;
-            skill.actTimer = tm.actSec;
             skill.actInterval = tm.actInterval;
-            skill.actIntervalTimer = tm.actInterval;
             skill.postSec = tm.postSec;
-            skill.postTimer = tm.postSec;
 
             skill.hasSpawnBullet = tm.hasSpawnBullet;
             skill.spawnPositionType = tm.spawnPositionType;

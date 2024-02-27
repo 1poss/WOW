@@ -47,6 +47,11 @@ namespace WOW.Business {
         }
 
         public static void LateTick(GameContext ctx, float latedt) {
+            int roleLen = ctx.roleRepository.TakeAll(out var roles);
+            for (int i = 0; i < roleLen; i++) {
+                var role = roles[i];
+                role.HUD_HpBarUpdate();
+            }
             UIDomain.Teamer_Update(ctx);
         }
 

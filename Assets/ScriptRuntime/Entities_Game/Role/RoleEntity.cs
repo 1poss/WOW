@@ -29,6 +29,8 @@ namespace WOW {
         public RoleAttrComponent attrComponent;
         public RoleCommandComponent commandComponent;
 
+        [SerializeField] UI.HUD_HpBar hpBar;
+
         public void Ctor() {
 
             isReachTarget = true;
@@ -98,6 +100,10 @@ namespace WOW {
 
         public void SR_Chosen(bool chosen) {
             chosenSR.enabled = chosen;
+        }
+
+        public void HUD_HpBarUpdate() {
+            hpBar.SetHp(attrComponent.hp, attrComponent.hpMax);
         }
 
     }

@@ -46,10 +46,10 @@ namespace WOW.Business {
                     ref float actIntervalTimer = ref fsm.casting_actIntervalTimer;
                     if (actIntervalTimer > 0) {
                         actIntervalTimer -= fixdt;
-                        if (actIntervalTimer <= 0) {
-                            actIntervalTimer += skill.actInterval;
-                            RoleDomain.SkillAct(ctx, role, skill);
-                        }
+                    }
+                    if (actIntervalTimer <= 0) {
+                        actIntervalTimer += skill.actInterval;
+                        RoleDomain.SkillAct(ctx, role, skill);
                     }
                 } else {
                     stage = SkillStage.Post;

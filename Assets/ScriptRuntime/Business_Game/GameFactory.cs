@@ -69,6 +69,7 @@ namespace WOW.Business {
 
             skill.hasActCollider = tm.hasActCollider;
             skill.actColliderShape = tm.actColliderShape;
+            skill.actColliderOffset = tm.actColliderOffset;
             skill.actColliderSize = tm.actColliderSize;
 
             skill.hasActEffector = tm.hasActEffector;

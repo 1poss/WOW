@@ -27,13 +27,13 @@ namespace WOW {
         public SkillSpawnPositionType spawnPositionType;
 
         // ==== Act ====
+        public bool hasActEffector;
+        public EffectorModel actEffector;
+
         public bool hasActCollider;
         public Vector2 actColliderOffset; // 2. 包围盒的中心点
         public ShapeType actColliderShape; // 3. 包围盒的形状, 当ShapeType为Point时, 指向一个目标
         public Vector2 actColliderSize; // 4. 包围盒的大小
-
-        public bool hasActEffector;
-        public EffectorModel actEffector; // 5. 包围盒的效果器
 
         public bool hasHitEffector;
         public EffectorModel hitEffector; // 6. 命中效果器

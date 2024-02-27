@@ -19,8 +19,14 @@ MonoBehaviour:
   cdSec: 1
   preSec: 0.1
   actSec: 0.5
-  actInterval: 0
+  actInterval: 0.25
   postSec: 0.1
   hasSpawnBullet: 1
   spawnPositionType: 0
   spawnBullet: {fileID: 0}
+  hasActEffector: 0
+  hasActCollider: 1
+  actColliderShape: 3
+  actColliderOffset: {x: 0, y: 0}
+  actColliderSize: {x: 2, y: 2}
+  hasActHit: 0

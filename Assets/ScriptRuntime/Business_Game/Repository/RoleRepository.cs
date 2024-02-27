@@ -47,6 +47,22 @@ namespace WOW.Business {
             return all.TryGetValue(id, out entity);
         }
 
+        public RoleEntity TryFindNearest(Vector2 pos, float radius) {
+            RoleEntity result = null;
+            float minDist = float.MaxValue;
+            foreach (var item in all.Values) {
+                if (item.allyType == AllyType.Player) {
+                    continue;
+                }
+                float dist = Vector2.Distance(pos, item.transform.position);
+                if (dist < radius && dist < minDist) {
+                    minDist = dist;
+                    result = item;
+                }
+            }
+            return result;
+        }
+
         public int TakeAll(out RoleEntity[] result) {
             var count = all.Count;
             if (count > tempArray.Length) {

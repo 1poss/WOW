@@ -43,16 +43,48 @@ namespace WOW.Business {
 
         }
 
-        public static void SkillAct(GameContext ctx, RoleEntity role, SkillSubentity skill) {
+        public static void SkillAct(GameContext ctx, RoleEntity caster, SkillSubentity skill) {
 
             if (skill.hasSpawnBullet) {
                 // TODO: SpawnBullet
             }
 
             if (skill.hasActCollider) {
-                
+
+                // Act Effector
+
+                // Act Overlap
+                Vector2 startPos = caster.transform.position + (caster.transform.rotation * skill.actColliderOffset);
+                if (skill.actColliderShape == ShapeType.Point) {
+                    // Find one
+                    RoleEntity victim = ctx.roleRepository.TryFindNearest(startPos, skill.castRange);
+                    if (victim != null && victim != caster) {
+                        SkillHitRole(ctx, caster, skill, victim);
+                    }
+                }
+
+                Collider2D[] colliders = null;
+                if (skill.actColliderShape == ShapeType.Rect) {
+                    colliders = Physics2D.OverlapBoxAll(startPos, skill.actColliderSize, 0);
+                } else if (skill.actColliderShape == ShapeType.Circle) {
+                    colliders = Physics2D.OverlapCircleAll(startPos, skill.actColliderSize.x);
+                }
+                if (colliders != null) {
+                    for (int i = 0; i < colliders.Length; i++) {
+                        var other = colliders[i];
+                        var victim = other.GetComponentInParent<RoleEntity>();
+                        if (victim != null && victim != caster) {
+                            SkillHitRole(ctx, caster, skill, victim);
+                        }
+                    }
+                }
+
             }
 
+        }
+
+        static void SkillHitRole(GameContext ctx, RoleEntity caster, SkillSubentity skill, RoleEntity victim) {
+            Debug.Log($"SkillHitRole: {caster.name} -> {victim.name}");
         }
 
     }

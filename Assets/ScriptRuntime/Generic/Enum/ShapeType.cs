@@ -4,7 +4,7 @@ namespace WOW {
         None,
         Circle,
         Fan,
-        Line,
+        Rect,
         Point, // 指向型 
     }
 }

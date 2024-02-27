@@ -17,16 +17,40 @@ MonoBehaviour:
   castDirection: 1
   indicateType: 0
   cdSec: 1
-  preSec: 0.1
-  actSec: 0.5
-  actInterval: 0.25
+  preSec: 0.55
+  actSec: 0.0001
+  actInterval: 0
   postSec: 0.1
   hasSpawnBullet: 1
   spawnPositionType: 0
   spawnBullet: {fileID: 0}
   hasActEffector: 0
+  actEffector:
+    hasInstantDamage: 0
+    instantDamage: 0
+    hasInstantHeal: 0
+    instantHeal: 0
+    hasBuff: 0
+    hasExplosion: 0
+    explosionRadius: 0
+    explosionDamage: 0
+    hasLink: 0
+    linkCount: 0
+    linkDamage: 0
   hasActCollider: 1
   actColliderShape: 3
   actColliderOffset: {x: 0, y: 0}
   actColliderSize: {x: 2, y: 2}
-  hasActHit: 0
+  hasHitEffector: 1
+  hitEffector:
+    hasInstantDamage: 1
+    instantDamage: 5
+    hasInstantHeal: 0
+    instantHeal: 0
+    hasBuff: 0
+    hasExplosion: 0
+    explosionRadius: 0
+    explosionDamage: 0
+    hasLink: 0
+    linkCount: 0
+    linkDamage: 0

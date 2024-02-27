@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 namespace WOW {
 
+    [Serializable]
     public struct EffectorModel {
 
         public bool hasInstantDamage;

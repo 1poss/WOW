@@ -85,6 +85,9 @@ namespace WOW.Business {
 
         static void SkillHitRole(GameContext ctx, RoleEntity caster, SkillSubentity skill, RoleEntity victim) {
             Debug.Log($"SkillHitRole: {caster.name} -> {victim.name}");
+            if (skill.hasHitEffector) {
+                victim.attrComponent.hp -= skill.hitEffector.instantDamage;
+            }
         }
 
     }

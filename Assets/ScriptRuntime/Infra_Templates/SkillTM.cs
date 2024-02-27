@@ -30,7 +30,7 @@ namespace WOW {
         public Vector2 actColliderOffset;
         public Vector2 actColliderSize;
 
-        public bool hasActHit;
+        public bool hasHitEffector;
         public EffectorModel hitEffector;
 
     }

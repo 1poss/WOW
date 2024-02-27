@@ -75,7 +75,7 @@ namespace WOW.Business {
             skill.hasActEffector = tm.hasActEffector;
             skill.actEffector = tm.actEffector;
 
-            skill.hasHitEffector = tm.hasActHit;
+            skill.hasHitEffector = tm.hasHitEffector;
             skill.hitEffector = tm.hitEffector;
 
             return skill;

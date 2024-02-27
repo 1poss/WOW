@@ -43,7 +43,15 @@ namespace WOW.Business {
 
         }
 
-        public static void SkillAct(GameContext ctx, RoleEntity role) {
+        public static void SkillAct(GameContext ctx, RoleEntity role, SkillSubentity skill) {
+
+            if (skill.hasSpawnBullet) {
+                // TODO: SpawnBullet
+            }
+
+            if (skill.hasActCollider) {
+                
+            }
 
         }
 

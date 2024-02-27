@@ -67,6 +67,16 @@ namespace WOW.Business {
             skill.hasSpawnBullet = tm.hasSpawnBullet;
             skill.spawnPositionType = tm.spawnPositionType;
 
+            skill.hasActCollider = tm.hasActCollider;
+            skill.actColliderShape = tm.actColliderShape;
+            skill.actColliderSize = tm.actColliderSize;
+
+            skill.hasActEffector = tm.hasActEffector;
+            skill.actEffector = tm.actEffector;
+
+            skill.hasHitEffector = tm.hasActHit;
+            skill.hitEffector = tm.hitEffector;
+
             return skill;
 
         }

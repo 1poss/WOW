@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace WOW {
 
-    public struct EffectorSubentity {
+    public struct EffectorModel {
 
         public bool hasInstantDamage;
         public float instantDamage;

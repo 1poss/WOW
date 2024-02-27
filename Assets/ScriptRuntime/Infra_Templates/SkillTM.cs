@@ -22,5 +22,15 @@ namespace WOW {
         public SkillSpawnPositionType spawnPositionType;
         public BulletTM spawnBullet;
 
+        public bool hasActCollider;
+        public ShapeType actColliderShape;
+        public Vector2 actColliderSize;
+
+        public bool hasActEffector;
+        public EffectorModel actEffector;
+
+        public bool hasActHit;
+        public EffectorModel hitEffector;
+
     }
 }

@@ -20,35 +20,42 @@ namespace WOW.Business {
         }
 
         static void Casting_FixTick(GameContext ctx, RoleEntity role, float fixdt) {
+
             if (role.fsm.casting_isEntering) {
                 role.fsm.casting_isEntering = false;
                 role.mod.Param_TriggerCast();
                 role.Move_Stop();
             }
 
-            var fsm = role.fsm;
-            var skill = fsm.casting_skill;
-            ref var stage = ref fsm.casting_stage;
+            RoleFSMComponent fsm = role.fsm;
+            SkillSubentity skill = fsm.casting_skill;
+            ref SkillStage stage = ref fsm.casting_stage;
             if (stage == SkillStage.Pre) {
+                // 前摇
                 if (fsm.casting_preTimer > 0) {
                     fsm.casting_preTimer -= fixdt;
                 } else {
                     stage = SkillStage.Act;
                 }
             } else if (stage == SkillStage.Act) {
-                if (fsm.casting_actTimer > 0) {
-                    fsm.casting_actTimer -= fixdt;
-                    if (fsm.casting_actIntervalTimer > 0) {
-                        fsm.casting_actIntervalTimer -= fixdt;
-                        if (fsm.casting_actIntervalTimer <= 0) {
-                            fsm.casting_actIntervalTimer = skill.actInterval;
-                            RoleDomain.SkillAct(ctx, role);
+                // 生效
+                ref float actTimer = ref fsm.casting_actTimer;
+                if (actTimer > 0) {
+                    actTimer -= fixdt;
+                    // 多次生效
+                    ref float actIntervalTimer = ref fsm.casting_actIntervalTimer;
+                    if (actIntervalTimer > 0) {
+                        actIntervalTimer -= fixdt;
+                        if (actIntervalTimer <= 0) {
+                            actIntervalTimer += skill.actInterval;
+                            RoleDomain.SkillAct(ctx, role, skill);
                         }
                     }
                 } else {
                     stage = SkillStage.Post;
                 }
             } else if (stage == SkillStage.Post) {
+                // 后摇
                 if (fsm.casting_postTimer > 0) {
                     fsm.casting_postTimer -= fixdt;
                 } else {

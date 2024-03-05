@@ -100,6 +100,7 @@ namespace WOW {
 
         public void SR_Chosen(bool chosen) {
             chosenSR.enabled = chosen;
+            lr.enabled = chosen;
         }
 
         public void HUD_HpBarUpdate() {

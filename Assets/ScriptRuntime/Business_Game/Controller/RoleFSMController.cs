@@ -21,13 +21,18 @@ namespace WOW.Business {
 
         static void Casting_FixTick(GameContext ctx, RoleEntity role, float fixdt) {
 
-            if (role.fsm.casting_isEntering) {
-                role.fsm.casting_isEntering = false;
+            RoleFSMComponent fsm = role.fsm;
+            if (fsm.casting_isEntering) {
+                fsm.casting_isEntering = false;
                 role.mod.Param_TriggerCast();
                 role.Move_Stop();
+
+                // Face To Target
+                if (ctx.roleRepository.TryGet(fsm.casting_targetID, out var target)) {
+                    role.Face_Dir(target.Pos_Pos() - role.Pos_Pos());
+                }
             }
 
-            RoleFSMComponent fsm = role.fsm;
             SkillSubentity skill = fsm.casting_skill;
             ref SkillStage stage = ref fsm.casting_stage;
             if (stage == SkillStage.Pre) {

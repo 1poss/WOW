@@ -53,11 +53,13 @@ namespace WOW.Business {
             skill.typeID = typeID;
             skill.typeName = tm.typeName;
 
+            skill.skillType = tm.skillType;
             skill.castDirection = tm.castDirection;
             skill.indicateType = tm.indicateType;
 
             skill.cdSec = tm.cdSec;
             skill.cdTimer = 0;
+            skill.castRange = tm.castRange;
 
             skill.preSec = tm.preSec;
             skill.actSec = tm.actSec;

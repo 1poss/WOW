@@ -12,6 +12,8 @@ namespace WOW {
 
         public float moveSpeed;
 
+        public float meleeSearchRange;
+
         public SkillTM[] skillPresets;
 
         public GameObject mod;

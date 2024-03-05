@@ -8,10 +8,13 @@ namespace WOW {
         public int typeID;
         public string typeName;
 
+        public SkillType skillType;
         public SkillCastDirection castDirection;
         public SkillIndicateType indicateType;
 
         public float cdSec;
+
+        public float castRange;
 
         public float preSec;
         public float actSec;

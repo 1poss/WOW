@@ -37,9 +37,16 @@ namespace WOW.Business {
                 return;
             }
 
-            if (skill.indicateType == SkillIndicateType.None) {
-                role.fsm.Casting_Enter(skill);
+            EntityType targetEntityType = EntityType.None;
+            int targetEntityID = 0;
+            if (skill.castDirection == SkillCastDirection.Trace) {
+                RoleEntity target = ctx.roleRepository.TryFindNearest(role.Pos_Pos(), skill.castRange);
+                if (target != null) {
+                    targetEntityType = target.entityType;
+                    targetEntityID = target.id;
+                }
             }
+            role.fsm.Casting_Enter(skill, targetEntityType, targetEntityID);
 
         }
 

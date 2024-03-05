@@ -47,6 +47,10 @@ namespace WOW {
             return new Vector2Int((int)transform.position.x, (int)transform.position.y);
         }
 
+        public Vector2 Pos_Pos() {
+            return transform.position;
+        }
+
         public void Pos_Set(Vector2 pos) {
             transform.position = pos;
         }
@@ -84,11 +88,7 @@ namespace WOW {
 
             mod.Param_SetMagnitude(1);
 
-            if (dir.x > 0) {
-                body.localScale = new Vector3(-1, 1, 1);
-            } else if (dir.x < 0) {
-                body.localScale = new Vector3(1, 1, 1);
-            }
+            Face_Dir(dir);
 
         }
 
@@ -96,6 +96,14 @@ namespace WOW {
             isReachTarget = true;
             lr.enabled = false;
             mod.Param_SetMagnitude(0);
+        }
+
+        public void Face_Dir(Vector2 dir) {
+            if (dir.x > 0) {
+                body.localScale = new Vector3(-1, 1, 1);
+            } else if (dir.x < 0) {
+                body.localScale = new Vector3(1, 1, 1);
+            }
         }
 
         public void SR_Chosen(bool chosen) {

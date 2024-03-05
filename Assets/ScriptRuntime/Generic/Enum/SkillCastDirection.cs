@@ -5,6 +5,7 @@ namespace WOW {
         Face,
         Static,
         ChosenPoint,
+        Trace,
     }
 
 }

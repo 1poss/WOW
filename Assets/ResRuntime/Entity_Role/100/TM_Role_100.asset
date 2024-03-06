@@ -15,8 +15,8 @@ MonoBehaviour:
   typeID: 100
   typeName: Test
   hp: 100
-  hpMax: 100
   moveSpeed: 5
+  meleeSearchRange: 5
   skillPresets:
   - {fileID: 11400000, guid: fb0941d47abf2f048a5ccc79e8015230, type: 2}
   mod: {fileID: 3936725879515656231, guid: 85faefe97b2d583439e548dee2ab170e, type: 3}

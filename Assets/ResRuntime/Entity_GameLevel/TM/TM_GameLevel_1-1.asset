@@ -22,4 +22,4 @@ MonoBehaviour:
   - allyType: 2
     entityType: 1
     typeID: 100
-    spawnPos: {x: 5, y: 0}
+    spawnPos: {x: 6, y: 0}

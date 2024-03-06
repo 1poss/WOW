@@ -25,6 +25,7 @@ namespace WOW {
         public Vector2 targetPos;
 
         public RoleFSMComponent fsm;
+        public RoleAIComponent aiComponent;
         public RoleSkillSlotComponent skillSlotComponent;
         public RoleAttrComponent attrComponent;
         public RoleCommandComponent commandComponent;
@@ -37,6 +38,7 @@ namespace WOW {
             chosenSR.enabled = false;
 
             fsm = new RoleFSMComponent();
+            aiComponent = new RoleAIComponent();
             skillSlotComponent = new RoleSkillSlotComponent();
             attrComponent = new RoleAttrComponent();
             commandComponent = new RoleCommandComponent();
@@ -59,6 +61,18 @@ namespace WOW {
             this.targetPos = targetPos;
             this.isReachTarget = false;
             lr.positionCount = 2;
+        }
+
+        public bool Move_To(Vector2 targetPos, float reachRange) {
+            Vector2 dir = targetPos - (Vector2)transform.position;
+            if (dir.sqrMagnitude > reachRange * reachRange) {
+                Face_Dir(dir);
+                rb.velocity = dir.normalized * attrComponent.moveSpeed;
+                return false;
+            } else {
+                rb.velocity = Vector2.zero;
+                return true;
+            }
         }
 
         public void Move_ByClickTick(float fixdt) {
@@ -96,6 +110,10 @@ namespace WOW {
             isReachTarget = true;
             lr.enabled = false;
             mod.Param_SetMagnitude(0);
+        }
+
+        public Vector2 Move_GetVelocity() {
+            return rb.velocity;
         }
 
         public void Face_Dir(Vector2 dir) {

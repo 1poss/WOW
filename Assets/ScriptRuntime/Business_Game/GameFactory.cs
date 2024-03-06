@@ -38,6 +38,9 @@ namespace WOW.Business {
             mod = GameObject.Instantiate(mod, role.body);
             role.mod = mod.GetComponent<RoleMod>();
 
+            var ai = role.aiComponent;
+            ai.meleeSearchRange = roleTM.meleeSearchRange;
+
             return role;
 
         }

@@ -15,23 +15,59 @@ namespace WOW.Business {
             role.Move_ByClickTick(fixdt);
         }
 
+        public static void StandSearchAutoMeleeTarget(GameContext ctx, RoleEntity role, float fixdt) {
+
+            var ai = role.aiComponent;
+            if (ai.autoMeleeTargetType != EntityType.None) {
+                return;
+            }
+            if (role.Move_GetVelocity().sqrMagnitude > 0.01f) {
+                return;
+            }
+            var melee = role.skillSlotComponent.GetMelee();
+            if (melee == null) {
+                return;
+            }
+
+            // Find Nearest Role
+            RoleEntity target = ctx.roleRepository.TryFindNearest(role.id, role.Pos_Pos(), ai.meleeSearchRange);
+            if (target != null) {
+                ai.autoMeleeTargetType = target.entityType;
+                ai.autoMeleeTargetID = target.id;
+            }
+
+        }
+
+        public static void MoveToAutoMeleeTarget(GameContext ctx, RoleEntity role, float fixdt) {
+
+            var ai = role.aiComponent;
+            if (ai.autoMeleeTargetType == EntityType.None) {
+                return;
+            }
+
+            if (ctx.roleRepository.TryGet(ai.autoMeleeTargetID, out var target)) {
+                var melee = role.skillSlotComponent.GetMelee();
+                if (melee != null) {
+                    bool isReached = role.Move_To(target.Pos_Pos(), melee.castRange);
+                    if (isReached) {
+                        Cast(ctx, role, melee);
+                    }
+                }
+            }
+
+        }
+
         public static void TryCast(GameContext ctx, RoleEntity role) {
             if (role.commandComponent.isSkillDown) {
                 bool has = role.skillSlotComponent.TryGet(role.commandComponent.castingSkillKey, out var skill);
                 if (!has) {
                     return;
                 }
-                Cast(ctx, role, skill.typeID);
+                Cast(ctx, role, skill);
             }
         }
 
-        public static void Cast(GameContext ctx, RoleEntity role, int skillTypeID) {
-
-            bool has = role.skillSlotComponent.TryGetByTypeID(skillTypeID, out var skill);
-            if (!has) {
-                return;
-            }
-
+        public static void Cast(GameContext ctx, RoleEntity role, SkillSubentity skill) {
             // TODO: Allow
             if (skill.cdTimer > 0) {
                 return;
@@ -40,14 +76,13 @@ namespace WOW.Business {
             EntityType targetEntityType = EntityType.None;
             int targetEntityID = 0;
             if (skill.castDirection == SkillCastDirection.Trace) {
-                RoleEntity target = ctx.roleRepository.TryFindNearest(role.Pos_Pos(), skill.castRange);
+                RoleEntity target = ctx.roleRepository.TryFindNearest(role.id, role.Pos_Pos(), skill.castRange);
                 if (target != null) {
                     targetEntityType = target.entityType;
                     targetEntityID = target.id;
                 }
             }
             role.fsm.Casting_Enter(skill, targetEntityType, targetEntityID);
-
         }
 
         public static void SkillAct(GameContext ctx, RoleEntity caster, SkillSubentity skill) {
@@ -64,7 +99,7 @@ namespace WOW.Business {
                 Vector2 startPos = caster.transform.position + (caster.transform.rotation * skill.actColliderOffset);
                 if (skill.actColliderShape == ShapeType.Point) {
                     // Find one
-                    RoleEntity victim = ctx.roleRepository.TryFindNearest(startPos, skill.castRange);
+                    RoleEntity victim = ctx.roleRepository.TryFindNearest(caster.id, startPos, skill.castRange);
                     if (victim != null && victim != caster) {
                         SkillHitRole(ctx, caster, skill, victim);
                     }

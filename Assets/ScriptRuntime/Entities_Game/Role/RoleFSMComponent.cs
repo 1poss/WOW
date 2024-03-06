@@ -31,6 +31,7 @@ namespace WOW {
             casting_preTimer = skill.preSec;
             casting_actTimer = skill.actSec;
             casting_actIntervalTimer = skill.actInterval;
+            casting_postTimer = skill.postSec;
         }
 
     }

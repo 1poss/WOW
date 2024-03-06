@@ -8,6 +8,8 @@ namespace WOW {
         // q w e r
         Dictionary<InputEnum, SkillSubentity> skillSlots;
 
+        SkillSubentity melee;
+
         readonly static InputEnum[] skillSlotKeys = new InputEnum[] {
             InputEnum.Skill1,
             InputEnum.Skill2,
@@ -21,12 +23,20 @@ namespace WOW {
         }
 
         public void Add(SkillSubentity skill) {
+            if (skill.skillType == SkillType.Melee) {
+                melee = skill;
+                return;
+            }
             for (int i = 0; i < skillSlotKeys.Length; i++) {
                 if (!skillSlots.ContainsKey(skillSlotKeys[i])) {
                     skillSlots.Add(skillSlotKeys[i], skill);
                     return;
                 }
             }
+        }
+
+        public SkillSubentity GetMelee() {
+            return melee;
         }
 
         public bool TryGet(InputEnum input, out SkillSubentity skill) {

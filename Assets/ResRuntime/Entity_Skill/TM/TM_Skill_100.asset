@@ -22,7 +22,7 @@ MonoBehaviour:
   preSec: 0.55
   actSec: 0.0001
   actInterval: 0
-  postSec: 0.1
+  postSec: 0.5
   hasSpawnBullet: 1
   spawnPositionType: 0
   spawnBullet: {fileID: 0}
@@ -40,9 +40,9 @@ MonoBehaviour:
     linkCount: 0
     linkDamage: 0
   hasActCollider: 1
-  actColliderShape: 3
+  actColliderShape: 1
   actColliderOffset: {x: 0, y: 0}
-  actColliderSize: {x: 2, y: 2}
+  actColliderSize: {x: 1, y: 1}
   hasHitEffector: 1
   hitEffector:
     hasInstantDamage: 1

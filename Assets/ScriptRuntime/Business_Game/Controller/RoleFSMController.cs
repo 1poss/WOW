@@ -15,6 +15,8 @@ namespace WOW.Business {
             if (role.fsm.normal_isEntering) {
                 role.fsm.normal_isEntering = false;
             }
+            RoleDomain.StandSearchAutoMeleeTarget(ctx, role, fixdt);
+            RoleDomain.MoveToAutoMeleeTarget(ctx, role, fixdt);
             RoleDomain.MoveByPath(ctx, role, fixdt);
             RoleDomain.TryCast(ctx, role);
         }

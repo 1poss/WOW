@@ -40,7 +40,7 @@ MonoBehaviour:
     linkCount: 0
     linkDamage: 0
   hasActCollider: 1
-  actColliderShape: 1
+  actColliderShape: 4
   actColliderOffset: {x: 0, y: 0}
   actColliderSize: {x: 1, y: 1}
   hasHitEffector: 1

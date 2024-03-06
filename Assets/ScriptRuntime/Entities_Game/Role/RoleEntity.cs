@@ -70,9 +70,11 @@ namespace WOW {
             if (dir.sqrMagnitude > reachRange * reachRange) {
                 Face_Dir(dir);
                 rb.velocity = dir.normalized * attrComponent.moveSpeed;
+                Move_Render(true, targetPos);
                 return false;
             } else {
                 rb.velocity = Vector2.zero;
+                Move_Render(false, targetPos);
                 return true;
             }
         }
@@ -80,8 +82,6 @@ namespace WOW {
         public void Move_ByClickTick(float fixdt) {
 
             if (!isClickMoving) {
-                lr.enabled = false;
-                mod.Param_SetMagnitude(0);
                 return;
             }
 
@@ -91,15 +91,13 @@ namespace WOW {
             Vector2 dir = targetPos - curPos;
             if (dir.sqrMagnitude <= moveSpeedDTSqr) {
                 rb.MovePosition(targetPos);
+                rb.velocity = Vector2.zero;
                 isClickMoving = false;
+                Move_Render(false, targetPos);
             } else {
-                Vector2 nextPos = curPos + dir.normalized * moveSpeed * fixdt;
-                rb.MovePosition(nextPos);
+                rb.velocity = dir.normalized * moveSpeed;
+                Move_Render(true, targetPos);
             }
-
-            lr.SetPosition(0, transform.position);
-
-            mod.Param_SetMagnitude(1);
 
             Face_Dir(dir);
 
@@ -107,8 +105,20 @@ namespace WOW {
 
         public void Move_Stop() {
             isClickMoving = false;
-            lr.enabled = false;
-            mod.Param_SetMagnitude(0);
+            rb.velocity = Vector2.zero;
+            Move_Render(false, Vector2.zero);
+        }
+
+        void Move_Render(bool isMoving, Vector2 targetPos) {
+            if (isMoving) {
+                lr.enabled = true;
+                lr.SetPosition(0, transform.position);
+                lr.SetPosition(1, targetPos);
+                mod.Param_SetMagnitude(1);
+            } else {
+                lr.enabled = false;
+                mod.Param_SetMagnitude(0);
+            }
         }
 
         public Vector2 Move_GetVelocity() {

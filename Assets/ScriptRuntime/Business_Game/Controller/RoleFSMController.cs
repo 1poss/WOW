@@ -14,10 +14,13 @@ namespace WOW.Business {
         static void Normal_FixTick(GameContext ctx, RoleEntity role, float fixdt) {
             if (role.fsm.normal_isEntering) {
                 role.fsm.normal_isEntering = false;
+                role.mod.Play_Idle();
             }
-            RoleDomain.StandSearchAutoMeleeTarget(ctx, role, fixdt);
-            RoleDomain.MoveToAutoMeleeTarget(ctx, role, fixdt);
-            RoleDomain.MoveByPath(ctx, role, fixdt);
+            if (!role.isClickMoving) {
+                RoleDomain.StandSearchAutoMeleeTarget(ctx, role, fixdt);
+                RoleDomain.MoveToAutoMeleeTarget(ctx, role, fixdt);
+            }
+            RoleDomain.MoveByClick(ctx, role, fixdt);
             RoleDomain.TryCast(ctx, role);
         }
 

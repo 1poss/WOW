@@ -11,6 +11,11 @@ namespace WOW {
 
         public RoleAIComponent() { }
 
+        public void CancelAutoMeleeTarget() {
+            autoMeleeTargetType = EntityType.None;
+            autoMeleeTargetID = 0;
+        }
+
     }
 
 }

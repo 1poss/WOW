@@ -11,7 +11,7 @@ namespace WOW.Business {
             return role;
         }
 
-        public static void MoveByPath(GameContext ctx, RoleEntity role, float fixdt) {
+        public static void MoveByClick(GameContext ctx, RoleEntity role, float fixdt) {
             role.Move_ByClickTick(fixdt);
         }
 

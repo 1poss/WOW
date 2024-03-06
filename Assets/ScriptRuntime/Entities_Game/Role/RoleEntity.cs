@@ -21,7 +21,7 @@ namespace WOW {
 
         public Sprite portraitIcon;
 
-        public bool isReachTarget;
+        public bool isClickMoving;
         public Vector2 targetPos;
 
         public RoleFSMComponent fsm;
@@ -34,7 +34,7 @@ namespace WOW {
 
         public void Ctor() {
 
-            isReachTarget = true;
+            isClickMoving = false;
             chosenSR.enabled = false;
 
             fsm = new RoleFSMComponent();
@@ -59,8 +59,10 @@ namespace WOW {
 
         public void Move_Start(Vector2 targetPos) {
             this.targetPos = targetPos;
-            this.isReachTarget = false;
+            this.isClickMoving = true;
+            lr.enabled = true;
             lr.positionCount = 2;
+            lr.SetPosition(1, targetPos);
         }
 
         public bool Move_To(Vector2 targetPos, float reachRange) {
@@ -77,13 +79,11 @@ namespace WOW {
 
         public void Move_ByClickTick(float fixdt) {
 
-            if (isReachTarget) {
+            if (!isClickMoving) {
                 lr.enabled = false;
                 mod.Param_SetMagnitude(0);
                 return;
             }
-
-            lr.enabled = true;
 
             Vector2 curPos = transform.position;
             float moveSpeed = attrComponent.moveSpeed;
@@ -91,14 +91,13 @@ namespace WOW {
             Vector2 dir = targetPos - curPos;
             if (dir.sqrMagnitude <= moveSpeedDTSqr) {
                 rb.MovePosition(targetPos);
-                isReachTarget = true;
+                isClickMoving = false;
             } else {
                 Vector2 nextPos = curPos + dir.normalized * moveSpeed * fixdt;
                 rb.MovePosition(nextPos);
             }
 
             lr.SetPosition(0, transform.position);
-            lr.SetPosition(1, targetPos);
 
             mod.Param_SetMagnitude(1);
 
@@ -107,7 +106,7 @@ namespace WOW {
         }
 
         public void Move_Stop() {
-            isReachTarget = true;
+            isClickMoving = false;
             lr.enabled = false;
             mod.Param_SetMagnitude(0);
         }

@@ -63,6 +63,10 @@ namespace WOW.Business {
         static void MouseMoving(GameContext ctx, InputEntity input) {
             if (input.isRightDown) {
                 if (ctx.TryGetChosenRole(out var role)) {
+                    role.aiComponent.CancelAutoMeleeTarget();
+                    if (role.fsm.status == RoleFSMStatus.Casting && role.fsm.casting_skill.skillType == SkillType.Melee) {
+                        role.fsm.Normal_Enter();
+                    }
                     role.Move_Start(input.downWorldPos);
                 }
             }
